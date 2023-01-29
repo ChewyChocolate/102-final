@@ -1,0 +1,79 @@
+#include<iostream>
+#include <cmath>
+
+using namespace std;
+int main()
+{
+    int loop;
+    float cm;
+    int small,big;
+    float classSize;
+    int upperLimit, lowerLimit;
+
+	cout<<"Enter how many numbers: ";
+    cin>> loop; 
+
+	int array[loop];
+    for(int i =0; i<loop; i++)
+    {
+        cout<<"Enter a Number: ";
+        cin>>array[i];
+        if(i==0)
+            small=array[i];
+        if(array[i]<small)
+            small = array[i];
+        else
+            big= array[i];
+    } 
+
+    for(int i = 0; i < loop; i++)
+    {
+        if(array[i] > big)
+            big = array[i];
+
+        if(array[i] < small)
+            small = array[i];
+    } 
+	
+    classSize = log10(loop) * 3.322 + 1; 
+
+    lowerLimit = small;
+    int x = small;
+    int y;
+    int mf = 0;
+	int cmf = 0;
+    float mean, range;
+    while(x < big)
+    {
+        x = x + round(classSize);
+        y++;
+	}
+	
+	
+    cout<<""<<endl;
+    cout<<"LL\t"<<"UL\t"<<"CM\t"<<"F\t"<<"MF"<<"\n";
+    for(int i = 0; i < y; i++){
+    	upperLimit = lowerLimit + round(classSize) - 1;
+        cm = (lowerLimit+upperLimit)/2;
+        int freq = 0;
+        for(int j = 0; j < loop; j++) {
+	        if(array[j] >= lowerLimit && array[j] <= upperLimit) {
+	           freq++;
+	        }
+	}
+		mf = cm * freq;
+		cmf = cmf+ mf;
+		cout<<lowerLimit<<"\t"<<upperLimit<<"\t"<<cm<< "\t" <<  freq << "\t" << mf <<"\n";
+        lowerLimit = lowerLimit + round(classSize);
+	}
+	
+	range = big - small;
+	mean = (float)cmf / loop;
+	cout<<"The largest is: "<<big << "\n";
+    cout<<"The smallest is: "<<small<<"\n";
+    cout << "The range is: " << range << "\n";
+    cout << "Class Size: " << round(classSize)<< "\n";
+    cout << "The CMF is: " << cmf << "\n";
+    cout << "The mean for grouped data is: " << mean << "\n";
+    return 0;
+}
