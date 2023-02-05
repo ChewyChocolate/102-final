@@ -31,7 +31,7 @@ int main(){
 	} 
 	
 	range = highest - lowest;
-	classSize = log10(loop) * 3.322 + 1;
+	classSize = (highest - lowest) / sqrt(loop);
 	classSize = round(classSize);
 	int column = 0;
     int x = lowest;
@@ -42,7 +42,8 @@ int main(){
 	
 	LL[0] = lowest;
 	UL[0] = classSize;
-	cout << "LL" << setw(tab) << "UL" << setw(tab) << "CM" << setw(tab) << "F" << setw(tab) << "MF" << endl;
+	cout << endl << endl;
+	cout << right << "LL" << setw(tab) << "UL" << setw(tab) << "CM" << setw(tab) << "F" << setw(tab) << "MF" << endl;
 	for(int i = 0; i <= column ; i++){
 		UL[i] = LL[i] + classSize - 1;
 		CM[i] =(LL[i] + UL [i]) / 2;
@@ -53,12 +54,13 @@ int main(){
 	        }
 		}
 		MF[i] = CM[i] * F[i];
-		cout << LL[i] << setw(tab) << UL[i] << setw(tab) << CM[i] << setw(tab) << F[i] << setw(tab) << MF[i] <<endl;
+		cout << right <<LL[i] << setw(tab) << UL[i] << setw(tab) << CM[i] << setw(tab) << F[i] << setw(tab) << MF[i] <<endl;
 		LL[i+1] = LL[i] + classSize;
 		CMF = CMF + MF[i];
 	}
 	
 	mean = (float)CMF / loop;
+	cout << endl << endl;
 	cout << "Highest Score: " << highest << endl;
 	cout << "Lowest ScoreL " << lowest << endl;
 	cout << "Class Size: " << classSize << endl;
